@@ -182,7 +182,7 @@ class Model_NestedSet extends CI_Model {
         $this->db->from($this->_ns_table . ' node');
         $this->db->from($this->_ns_table . ' leaf');
 
-        $this->db->where(sprintf('(leaf.%1$s BETWEEN node.%1$s AND node.%2$s)', $this->_ns_ln_field, $this->_ns_rn_field));
+        $this->db->where(sprintf('(leaf.%1$s BETWEEN node.%1$s AND node.%2$s)', $this->_ns_ln_field, $this->_ns_rn_field), false, false);
         
         $this->db->group_by(sprintf('leaf.%s', $this->_ns_pk_field));
         $this->db->order_by(sprintf('leaf.%s', $this->_ns_ln_field));
