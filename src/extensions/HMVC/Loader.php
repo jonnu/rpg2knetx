@@ -188,8 +188,10 @@ class HMVC_Loader extends CI_Loader {
      * @return	void
      */
     public function view($view, $vars = array(), $return = FALSE) {
+
         // Detect module
-        if (list($module, $class) = $this->detect_module($view)) {
+        if (list($module, $class) = $this->detect_module($view, false)) {
+
             // Module already loaded
             if (in_array($module, $this->_ci_modules)) {
                 return parent::view($class, $vars, $return);
@@ -443,8 +445,12 @@ class HMVC_Loader extends CI_Loader {
      * @param	string
      * @return	array|boolean
      */
-    private function detect_module($class) {
-        $class = str_replace('.php', '', trim($class, '/'));
+    private function detect_module($class, $no_ext = true) {
+
+        if ($no_ext) {
+            $class = str_replace(EXT, '', trim($class, '/'));
+        }
+        
         if (($first_slash = strpos($class, '/')) !== FALSE) {
             $module = substr($class, 0, $first_slash);
             $class = substr($class, $first_slash + 1);
