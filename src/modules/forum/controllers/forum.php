@@ -13,7 +13,9 @@ class Forum extends CI_Controller {
 		
 		
 
-		$this->forum->temp_getlist();
+		//$this->forum->temp_getlist();
+
+		$this->load->view('forum/index.view.php');
 	}
 
 
