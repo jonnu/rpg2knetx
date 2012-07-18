@@ -16,4 +16,4 @@ workers
 IRC
 ***
 
-You can find us at irc://irc.phrenzy.org/rpg2knet (SSL +9000).
+You can find us at irc://irc.phrenzy.org/rpg2knet
