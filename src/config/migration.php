@@ -2,7 +2,7 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP 5.1.6 or newer
+ * An open source application development framework for PHP 5.2.4 or newer
  *
  * NOTICE OF LICENSE
  *
@@ -16,12 +16,12 @@
  * through the world wide web, please send an email to
  * licensing@ellislab.com so we can send you a copy immediately.
  *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2012, EllisLab, Inc. (http://ellislab.com/)
- * @license		http://opensource.org/licenses/AFL-3.0 Academic Free License (AFL 3.0)
- * @link		http://codeigniter.com
- * @since		Version 1.0
+ * @package     CodeIgniter
+ * @author      EllisLab Dev Team
+ * @copyright   Copyright (c) 2008 - 2012, EllisLab, Inc. (http://ellislab.com/)
+ * @license     http://opensource.org/licenses/AFL-3.0 Academic Free License (AFL 3.0)
+ * @link        http://codeigniter.com
+ * @since       Version 1.0
  * @filesource
  */
 

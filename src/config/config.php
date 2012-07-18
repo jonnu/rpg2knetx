@@ -2,12 +2,12 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP 5.1.6 or newer
+ * An open source application development framework for PHP 5.2.4 or newer
  *
  * NOTICE OF LICENSE
- * 
+ *
  * Licensed under the Academic Free License version 3.0
- * 
+ *
  * This source file is subject to the Academic Free License (AFL 3.0) that is
  * bundled with this package in the files license_afl.txt / license_afl.rst.
  * It is also available through the world wide web at this URL:
@@ -16,12 +16,12 @@
  * through the world wide web, please send an email to
  * licensing@ellislab.com so we can send you a copy immediately.
  *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2012, EllisLab, Inc. (http://ellislab.com/)
- * @license		http://opensource.org/licenses/AFL-3.0 Academic Free License (AFL 3.0)
- * @link		http://codeigniter.com
- * @since		Version 1.0
+ * @package     CodeIgniter
+ * @author      EllisLab Dev Team
+ * @copyright   Copyright (c) 2008 - 2012, EllisLab, Inc. (http://ellislab.com/)
+ * @license     http://opensource.org/licenses/AFL-3.0 Academic Free License (AFL 3.0)
+ * @link        http://codeigniter.com
+ * @since       Version 1.0
  * @filesource
  */
 
@@ -33,13 +33,13 @@
 | URL to your CodeIgniter root. Typically this will be your base URL,
 | WITH a trailing slash:
 |
-|	http://example.com/
+| http://example.com/
 |
 | If this is not set then CodeIgniter will guess the protocol, domain and
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+$config['base_url'] = 'http://rpg2knet/';
 
 /*
 |--------------------------------------------------------------------------
@@ -62,14 +62,14 @@ $config['index_page'] = '';
 | URI string.  The default setting of 'AUTO' works for most servers.
 | If your links do not seem to work, try one of the other delicious flavors:
 |
-| 'AUTO'			Default - auto detects
-| 'PATH_INFO'		Uses the PATH_INFO
-| 'QUERY_STRING'	Uses the QUERY_STRING
-| 'REQUEST_URI'		Uses the REQUEST_URI
-| 'ORIG_PATH_INFO'	Uses the ORIG_PATH_INFO
+| 'AUTO'   Default - auto detects
+| 'PATH_INFO'  Uses the PATH_INFO
+| 'QUERY_STRING' Uses the QUERY_STRING
+| 'REQUEST_URI'  Uses the REQUEST_URI
+| 'ORIG_PATH_INFO' Uses the ORIG_PATH_INFO
 |
 */
-$config['uri_protocol']	= 'AUTO';
+$config['uri_protocol'] = 'AUTO';
 
 /*
 |--------------------------------------------------------------------------
@@ -94,7 +94,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language'] = 'english';
 
 /*
 |--------------------------------------------------------------------------
@@ -181,11 +181,11 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 | use segment based URLs.
 |
 */
-$config['allow_get_array']		= TRUE;
+$config['allow_get_array']  = TRUE;
 $config['enable_query_strings'] = FALSE;
-$config['controller_trigger']	= 'c';
-$config['function_trigger']		= 'm';
-$config['directory_trigger']	= 'd'; // experimental not currently in use
+$config['controller_trigger'] = 'c';
+$config['function_trigger']  = 'm';
+$config['directory_trigger'] = 'd'; // experimental not currently in use
 
 /*
 |--------------------------------------------------------------------------
@@ -197,15 +197,15 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 | You can enable error logging by setting a threshold over zero. The
 | threshold determines what gets logged. Threshold options are:
 |
-|	0 = Disables logging, Error logging TURNED OFF
-|	1 = Error Messages (including PHP errors)
-|	2 = Debug Messages
-|	3 = Informational Messages
-|	4 = All Messages
+| 0 = Disables logging, Error logging TURNED OFF
+| 1 = Error Messages (including PHP errors)
+| 2 = Debug Messages
+| 3 = Informational Messages
+| 4 = All Messages
 |
 | You can also pass in a array with threshold levels to show individual error types
 | 
-| 	array(2) = Debug Messages, without Error Messages
+|  array(2) = Debug Messages, without Error Messages
 |
 | For a live site you'll usually only enable Errors (1) to be logged otherwise
 | your log files will fill up very fast.
@@ -265,28 +265,28 @@ $config['encryption_key'] = '';
 | Session Variables
 |--------------------------------------------------------------------------
 |
-| 'sess_cookie_name'		= the name you want for the cookie
-| 'sess_expiration'			= the number of SECONDS you want the session to last.
+| 'sess_cookie_name'  = the name you want for the cookie
+| 'sess_expiration'   = the number of SECONDS you want the session to last.
 |   by default sessions last 7200 seconds (two hours).  Set to zero for no expiration.
-| 'sess_expire_on_close'	= Whether to cause the session to expire automatically
+| 'sess_expire_on_close' = Whether to cause the session to expire automatically
 |   when the browser window is closed
-| 'sess_encrypt_cookie'		= Whether to encrypt the cookie
-| 'sess_use_database'		= Whether to save the session data to a database
-| 'sess_table_name'			= The name of the session database table
-| 'sess_match_ip'			= Whether to match the user's IP address when reading the session data
-| 'sess_match_useragent'	= Whether to match the User Agent when reading the session data
-| 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
+| 'sess_encrypt_cookie'  = Whether to encrypt the cookie
+| 'sess_use_database'  = Whether to save the session data to a database
+| 'sess_table_name'   = The name of the session database table
+| 'sess_match_ip'   = Whether to match the user's IP address when reading the session data
+| 'sess_match_useragent' = Whether to match the User Agent when reading the session data
+| 'sess_time_to_update'  = how many seconds between CI refreshing Session Information
 |
 */
-$config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 7200;
-$config['sess_expire_on_close']	= FALSE;
-$config['sess_encrypt_cookie']	= FALSE;
-$config['sess_use_database']	= FALSE;
-$config['sess_table_name']		= 'ci_sessions';
-$config['sess_match_ip']		= FALSE;
-$config['sess_match_useragent']	= TRUE;
-$config['sess_time_to_update']	= 300;
+$config['sess_cookie_name']  = 'ci_session';
+$config['sess_expiration']  = 7200;
+$config['sess_expire_on_close'] = FALSE;
+$config['sess_encrypt_cookie'] = FALSE;
+$config['sess_use_database'] = FALSE;
+$config['sess_table_name']  = 'ci_sessions';
+$config['sess_match_ip']  = FALSE;
+$config['sess_match_useragent'] = TRUE;
+$config['sess_time_to_update'] = 300;
 
 /*
 |--------------------------------------------------------------------------
@@ -299,10 +299,10 @@ $config['sess_time_to_update']	= 300;
 | 'cookie_secure' =  Cookies will only be set if a secure HTTPS connection exists.
 |
 */
-$config['cookie_prefix']	= "";
-$config['cookie_domain']	= "";
-$config['cookie_path']		= "/";
-$config['cookie_secure']	= FALSE;
+$config['cookie_prefix'] = "";
+$config['cookie_domain'] = "";
+$config['cookie_path']  = "/";
+$config['cookie_secure'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -421,21 +421,185 @@ $config['modules_locations'] = array(APPPATH . 'modules/');
 |
 */
 
+
+//set_include_path(join(PATH_SEPARATOR, $include_paths));
+//var_dump(get_include_path());
+/*
+$paths = array();
+foreach ($config['modules_locations'] as $location) {
+    foreach (new DirectoryIterator($location) as $folder) {
+        if (!$folder->isDir() || $folder->isDot()) {
+            continue;
+        }
+        $paths[] = realpath($folder->getPathname()) . DIRECTORY_SEPARATOR . 'libraries';
+    }
+}
+
+$paths = array_merge(array('.', realpath(APPPATH) . DIRECTORY_SEPARATOR . 'libraries'), $paths);
+ */
+//var_dump($paths);
+//var_dump(join($paths, PATH_SEPARATOR));
+//exit;
+
+//if (!class_exists('RPG_Autoloader')) {
+
+    class RPG_Autoloader {
+
+        private static $config  = array();
+        private static $modules = array();
+
+        static public function init($config = array()) {
+
+            self::$config = $config;
+
+            foreach (self::$config['modules_locations'] as $location) {
+
+                foreach (new DirectoryIterator($location) as $folder) {
+
+                    if (!$folder->isDir() || $folder->isDot()) {
+                        continue;
+                    }
+
+                    // Remember module.
+                    self::$modules[] = $folder->getBasename();
+
+                    $paths[] = realpath($folder->getPathname()) . DIRECTORY_SEPARATOR . 'libraries';
+                }
+            }
+
+            $paths = array_merge(array('.', realpath(APPPATH) . DIRECTORY_SEPARATOR . 'libraries'), $paths);
+
+            set_include_path(join($paths, PATH_SEPARATOR));
+
+            //var_dump($paths);
+            spl_autoload_register(array(__CLASS__, 'load'));
+        }
+
+        static public function load($class) {
+
+            $stub = strtoupper(substr($class, 0, strpos($class, '_')));
+            $psr0 = str_replace(array('\\', '_'), '/', $class) . EXT;
+
+            switch ($stub) {
+
+                case 'CI':
+                case rtrim(self::$config['subclass_prefix'], '_'):
+                    return;
+
+                case 'MODEL':
+                    return self::model($class);
+
+                default:
+
+                    if (false !== strpos($psr0, '/')) {
+                        $peep = strtolower(substr($psr0, 0, strpos($psr0, '/')));
+                        if (in_array($peep, self::$modules)) {
+                            $psr0 = substr($psr0, strpos($psr0, '/') + 1);
+                        }
+                        
+                        //
+                    }
+
+
+                    if (false === ($filename = stream_resolve_include_path($psr0))) {
+                        echo $peep . '<br />';
+                        echo $psr0 . '<br />';
+                        echo get_include_path() . '<br />';
+                        throw new Exception('Unable to load ' . $psr0);
+                    }
+
+                    require_once $filename;
+            }
+
+            return false;
+        }
+
+
+        /**
+         * model
+         *
+         * @todo the models do not obey PSR-0.
+         * @param string $class
+         */
+        static public function model($class) {
+
+            foreach(array(APPPATH . 'models') as $autoload_path_folder) {
+
+                if (!file_exists($autoload_path_class = $autoload_path_folder . DIRECTORY_SEPARATOR . $class . EXT)) {
+                    continue;
+                }
+
+                require $autoload_path_class;
+            }
+        }
+    }
+
+    RPG_Autoloader::init($config);
+//}
+/*
 function __autoload($class) {
-	
+
+    // CI_ and RPG_ classes are handled by CodeIgniter
+    if(strpos($class, 'CI_') === 0 || strpos($class, 'RPG_') === 0) {
+        return;
+    }
+}
+ */
+// @todo convert this to spl_autoload_register
+/*
+function __autoload($class) {
+ 
+    // CI_ and RPG_ classes are handled by CodeIgniter
     if(strpos($class, 'CI_') === 0 || strpos($class, 'RPG_') === 0) {
         return;
     }
 
-    foreach(array(APPPATH . 'models') as $autoload_path_folder) {
+    // Special Case for models.
+    if (0 === strcasecmp(substr($class, 0, 6), 'model_')) {
 
-        if(!file_exists($autoload_path_class = $autoload_path_folder . DIRECTORY_SEPARATOR . $class . EXT)) {
-            continue;
+        foreach(array(APPPATH . 'models') as $autoload_path_folder) {
+
+            if(!file_exists($autoload_path_class = $autoload_path_folder . DIRECTORY_SEPARATOR . $class . EXT)) {
+                continue;
+            }
+
+            require_once $autoload_path_class;
         }
 
-        require_once $autoload_path_class;
+        return;
+    }
+
+    // PSR-0?
+    // The PSR-0 standard indicates that class namespaces and underscores
+    // should be used to indcate the directory tree in which the class
+    // resides, so we'll convert them to slashes.
+    $file = str_replace(array('\\', '_'), '/', $class);
+
+    $paths = array(
+        realpath(APPPATH)
+    );
+
+    $locations = get_instance()->config->item('modules_locations');
+    foreach ($locations as $location) {
+        foreach (new DirectoryIterator($location) as $folder) {
+            if (!$folder->isDir() || $folder->isDot()) {
+                continue;
+            }
+            $paths[] = $folder->getPathname();
+        }
+    }
+
+    $paths = array_reverse($paths);
+
+    foreach ($paths as $path) {
+        $tpath = $path . DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . $file . EXT;
+        //echo $tpath . '<br />';
+        if (file_exists($tpath)) {
+            return require $tpath;
+        }
     }
 }
+ */
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
