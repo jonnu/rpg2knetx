@@ -243,4 +243,6 @@ abstract class User {
     public function cannot($permission = null) {
         return !$this->can($permission);
     }
+
+
 }

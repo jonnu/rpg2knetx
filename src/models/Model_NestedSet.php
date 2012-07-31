@@ -1,5 +1,20 @@
 <?php
+/**
+ * RPG2KNET (http://www.rpg2knet.com/)
+ *
+ * @link      http://github.com/jonnu/rpg2knet for the source repository
+ * @copyright Copyright (c) 1999-2012 Phrenzy (http://www.phrenzy.org/)
+ * @author    jonnu (http://jonnu.eu/)
+ * @license   TBD
+ * @version   4.0
+ */
 
+
+/**
+ * Model_NestedSet
+ *
+ * @category  Core
+ */
 class Model_NestedSet extends CI_Model {
     
     const AT_HEAD   = 0x01;     // Stick at the head
@@ -117,39 +132,68 @@ class Model_NestedSet extends CI_Model {
         return $deleted_items === 0 ? false : $deleted_items;
     }
 
+    */
 
-    public function retrieve_by_id($item_id) {
 
-        $this->db->select('pn.*');
-        $this->db->select('
-        ifnull((
-            select pp.page_id
-                from page pp
-                    where pp.page_left < pn.page_left AND pp.page_right > pn.page_right
-                order by
-                    pp.page_right asc
-                limit 1
-        ), 0) as page_parent_id', false);
-        $this->db->from('page pn');
-        $this->db->from('page pp');
-        $this->db->where('pn.page_id', $item_id);
-        $this->db->select('group_concat(pp.page_slug order by pp.page_left separator "") as page_slug_path', false);
-        $this->db->where('pn.page_left between pp.page_left and pp.page_right');
-        $this->db->order_by('pn.page_left');
-        $this->db->group_by('pn.page_id');
-        $page_result = $this->db->get();
-        
-        if($page_result->num_rows() !== 1) {
+    /**
+     * retrieve
+     *
+     * @todo Remove references to forum object in field names
+     * @todo Allow retrieval via slug OR via ID (or some common field)
+     */
+    public function retrieve($leaf_slug) {
+
+        $this->db->select('leaf.*');
+        $this->db->select(sprintf('
+                IFNULL((
+                    SELECT
+                        node.%2$s
+                    FROM
+                        %1$s node
+                    WHERE
+                        node.%3$s < leaf.%3$s AND node.%4$s > leaf.%4$s
+                    ORDER BY
+                        node.%4$s ASC
+                    LIMIT
+                        1
+                ), 0) as forum_parent_id',
+            $this->_ns_table,
+            $this->_ns_pk_field,
+            $this->_ns_ln_field,
+            $this->_ns_rn_field
+        ), false);
+
+        $this->db->from($this->_ns_table . ' leaf');
+        $this->db->from($this->_ns_table . ' node');
+
+        // URI/Slug
+        $this->db->select(sprintf('group_concat(node.%s order by node.%s separator "/") as %s',
+            'forum_slug',
+            $this->_ns_ln_field,
+            'forum_uri'
+        ), false);
+
+        $this->db->where(sprintf('leaf.%1$s between node.%1$s and node.%2$s', $this->_ns_ln_field, $this->_ns_rn_field));
+        $this->db->where(sprintf('leaf.%1$s', 'forum_slug'), $leaf_slug);
+
+        $this->db->order_by(sprintf('leaf.%s', $this->_ns_ln_field));
+        $this->db->group_by(sprintf('leaf.%s', $this->_ns_pk_field));
+        $object_result = $this->db->get();
+
+        // We are expecting at least one object
+        if ($object_result->num_rows() !== 1) {
             return false;
         }
 
-        return $page_result->row(0, 'Page_Object');
-    }*/
+        $object_name = ucfirst($this->_ns_table) . '_Object';
+
+        return $object_result->first_row($object_name);
+    }
 
 
     /**
      * retrieve_nested
-     * 
+     *
      * Obtain a nested 'tree' array of objects from
      * the database.  Optionally, supply an ID for which
      * record you would like the root to be (which can 
@@ -157,7 +201,7 @@ class Model_NestedSet extends CI_Model {
      *
      * @param   mixed $object_name
      * @param   int   $element_root
-     * @param   int   $element_limit  
+     * @param   int   $element_limit
      *
      * @return  array
      */
@@ -250,11 +294,13 @@ class Model_NestedSet extends CI_Model {
     }
 
 
-
-
     /**
      * build_tree
      *
+     * Create a 'tree' (using PHPs array datastructure) of
+     * objects from a flat array (with noted depths). The
+     * incoming array will be assumed to be from a nested
+     * set query, and as such will be ordered correctly.
      *
      * @param array $objects
      *
@@ -335,7 +381,16 @@ class Model_NestedSet extends CI_Model {
 }
 
 
-
+/**
+ * Thoughts:
+ *
+ * Data_Object (abstract)
+ * Data_Object < Data_Object_Nestable (abstract)
+ *
+ * + Data_Object_Exception?
+ *
+ * Nestable_Object
+ */
 abstract class Nestable_Object {
 
     private $key;
@@ -370,7 +425,6 @@ abstract class Nestable_Object {
         return $this->{$this->key . '_' . $property}; 
     }
 }
-
 
 
 class NestedSet_Exception extends Exception {}
