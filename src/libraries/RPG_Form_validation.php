@@ -197,6 +197,75 @@ class RPG_Form_Validation extends CI_Form_Validation {
 
 
     /**
+     * module
+     *
+     * Pass field data through to a module's model for validation.
+     * Data is passed by reference in order to allow functions to
+     * alter the content of the field.
+     *
+     * @param string $data
+     * @param string $arguments
+     *
+     * @return boolean
+     */
+    public function module(&$data, $arguments) {
+
+        if (!preg_match('/^((?<model>[a-z_]+),)?(?<func>[a-z_]+)(\[(?<param>[a-z,]+)\])?$/', $arguments, $elements)) {
+            $this->set_message(__function__, 'Invalid module validation call: "%2$s"', $arguments);
+            return false;
+        }
+
+        $module     = $this->CI->router->fetch_module();
+        $function   = $elements['func'];
+        $parameters = array(&$data);
+
+        if (isset($elements['model'])) {
+            $model = $elements['model'];
+        }
+
+        if (isset($elements['param'])) {
+            $parameters = array_merge($parameters, explode(',', $elements['param']));
+        }
+
+        if (!property_exists($this->CI, $model)) {
+            $this->CI->load->model($module . '/' . $model, $model);
+        }
+
+        if (!method_exists($this->CI->$model, $function)) {
+
+            $this->set_message(__function__, sprintf(
+                'Cannot locate validate method "%s->%s(%s)"',
+                $model,
+                $function,
+                implode(', ', array_map(
+                    function($i) {
+                        return '$' . (++$i);
+                    },
+                    array_slice(array_keys($parameters), 1)
+                ))
+            ));
+
+            return false;
+        }
+
+        // Call the validation function on the foreign model
+        $return = call_user_func_array(array($this->CI->$model, $function), $parameters);
+
+        if (!is_bool($return)) {
+            $this->set_message(__function__, sprintf('Validation function %s must return boolean', $function));
+            return false;
+        }
+
+        // If validation failed, take the error from the stack to make it 'belong' to this function
+        if (!$return) {
+            $this->set_message(__function__, array_pop($this->_error_messages));
+        }
+
+        return $return;
+    }
+
+
+    /**
      * nonce_create
      *
      *

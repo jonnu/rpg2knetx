@@ -58,7 +58,7 @@ $config = array(
         array(
             'field' => 'user_name',
             'label' => 'User Name',
-            'rules' => 'required'
+            'rules' => 'required|module[user_model,valid_username]'
         ),
         array(
             'field' => 'user_email',

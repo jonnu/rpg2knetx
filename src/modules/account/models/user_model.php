@@ -17,6 +17,9 @@
  */
 class User_Model extends CI_Model {
 
+    const CONF_USERNAME_LEN_MIN = 3;
+    const CONF_USERNAME_LEN_MAX = 20;
+
     public function __construct() {
 
         parent::__construct();
@@ -329,6 +332,59 @@ class User_Model extends CI_Model {
         $this->db->set('user_date_pulsed', $time->format('Y-m-d H:i:s'));
         $this->db->where('user_id', $user_id);
         $this->db->update('user');
+    }
+
+
+    /**
+     * valid_username
+     *
+     * @param string $user_name
+     *
+     * @return boolean
+     */
+    public function valid_username($user_name) {
+
+        // Formatting.
+        $user_name = trim($user_name);
+        $length    = strlen($user_name);
+
+        // 1. length check of username
+        if ($length < self::CONF_USERNAME_LEN_MIN || $length > self::CONF_USERNAME_LEN_MAX) {
+
+            $this->form_validation->set_message(__function__, sprintf(
+                  'Must be between %d and %d characters long'
+                , self::CONF_USERNAME_LEN_MIN
+                , self::CONF_USERNAME_LEN_MAX
+            ));
+
+            return false;
+        }
+
+        // allow a-z, 0-9, underscore, dash & space
+        if (!preg_match('/^[a-z0-9_-\s]+$/i', $user_name)) {
+            $this->form_validation->set_message(__function__, '%s contains illegal characters.');
+            return false;
+        }
+
+        // must start with a letter
+        if (!preg_match('/^[a-z]/i', $user_name)) {
+            $this->form_validation->set_message(__function__, '%s must start with a letter');
+            return false;
+        }
+
+        // must end with a letter/number
+        if (!preg_match('/[a-z0-9]$/i', $user_name)) {
+            $this->form_validation->set_message(__function__, '%s must end with a letter or number');
+            return false;
+        }
+
+        // cannot contain two spaces in a row
+        if (preg_match('/\s{2,}/', $user_name, $match)) {
+            $this->form_validation->set_message(__function__, '%s cannot contain two or more adjacent spaces');
+            return false;
+        }
+
+        return true;
     }
 
 
