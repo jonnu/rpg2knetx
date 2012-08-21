@@ -1,2 +1,7 @@
+.settings
+.buildpath
+.project
+.DS_Store
 *.sh
 *.log
+src/config/database.php

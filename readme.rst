@@ -24,12 +24,12 @@ requirements
 The source code should run on most standard webservers. To 
 install, paths may need altering in the bootstrap file 
 (www/index.php) and the database will need configuring 
-(src/config/database.php) & installing (todo... sorry!)
+(src/config/database.php) & installing (doc/sql/rpg2knet.sql).
 
-- PHP 5.1+
+- PHP 5.3+
 - MySQL 5.0+
 - apache, or nginx
-- CodeIgniter_.
+- CodeIgniter_ (`github <https://github.com/EllisLab/CodeIgniter/>`_)
 
 ***
 IRC
@@ -37,4 +37,4 @@ IRC
 
 You can find us at irc://irc.phrenzy.org/rpg2knet
 
-.. _CodeIgniter: http://www.codeigniter.com/
+.. _CodeIgniter: http://www.codeigniter.com
