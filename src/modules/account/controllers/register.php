@@ -18,8 +18,8 @@ class Register extends CI_Controller {
 
         if ($this->user->authenticated()) {
 
-            // @TODO.
-            die('already registered');
+            $this->session->message('Cannot register two accounts');
+            return redirect('account');
         }
 
         $this->load->library('form_validation');

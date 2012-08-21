@@ -64,7 +64,7 @@ class User_Model extends CI_Model {
             'security_type'    => 'AFFIRM',
             'security_user_hash' => $user_confirm,
             'security_user_address' => $user_address,
-            'security_date_expires' => $user_utcdate->add(new DateInterval('P1W'))
+            'security_date_expires' => $user_utcdate->add(new DateInterval('P1W'))->format('Y-m-d H:i:s')
         );
 
         $this->db->insert('security', $security_payload);
@@ -379,7 +379,7 @@ class User_Model extends CI_Model {
         }
 
         // cannot contain two spaces in a row
-        if (preg_match('/\s{2,}/', $user_name, $match)) {
+        if (preg_match('/\s{2,}/', $user_name)) {
             $this->form_validation->set_message(__function__, '%s cannot contain two or more adjacent spaces');
             return false;
         }
