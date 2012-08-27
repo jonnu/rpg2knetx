@@ -1,8 +1,19 @@
 <?php
-(defined('BASEPATH')) or exit('No direct script access allowed');
+/**
+ * RPG2KNET (http://www.rpg2knet.com/)
+ *
+ * @link      http://github.com/jonnu/rpg2knet for the source repository
+ * @copyright Copyright (c) 1999-2012 Phrenzy (http://www.phrenzy.org/)
+ * @author    jonnu (http://jonnu.eu/)
+ * @license   TBD
+ * @version   4.0
+ */
 
-/* load the HMVC_Router class */
-require APPPATH . 'extensions/HMVC/Router.php';
 
+/**
+ * RPG_Router
+ *
+ * @category  Core
+ */
 class RPG_Router extends HMVC_Router {
 }
